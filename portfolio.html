@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mark Zebian</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Define Inter font as fallback, allow smooth scrolling */
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; }
+
+        /* Tailwind Configuration */
+        .qualification-content {
+            display: none; /* Controlled by JS for accordion effect */
+        }
+        .progress {
+            transition: width 1s ease-out; /* Smooth animation for skill bars */
+        }
+        /* New style for the mobile menu */
+        #mobile-menu {
+            transition: transform 0.3s ease-in-out;
+            transform: translateY(-100%); /* Start off-screen */
+        }
+        #mobile-menu.open {
+            transform: translateY(0);
+        }
+    </style>
+    <script>
+        // Set up the color variables for Tailwind
+        tailwind.config = {
+            darkMode: 'class', // Enable dark mode using the 'dark' class on the HTML tag
+            theme: {
+                extend: {
+                    colors: {
+                        'ot-primary': '#F58220', // Bright Orange Accent
+                        'ot-secondary': '#003865', // Deep Navy Blue
+                        'ot-light-bg': '#f5f5f5', // Light background
+                        'ot-dark-bg': '#1a1a1a', // Dark background
+                    },
+                    boxShadow: {
+                        'ot-primary': '0 4px 15px rgba(245, 130, 32, 0.4)',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-ot-light-bg text-gray-800 transition-colors duration-300">
+
+    <header class="sticky top-0 z-50 bg-ot-secondary/95 backdrop-blur-sm shadow-xl">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <a href="#hero" class="text-2xl font-extrabold text-ot-primary hover:text-white transition duration-300">
+                Mark Zebian
+            </a>
+            
+            <div class="space-x-4 hidden md:flex items-center">
+                <a href="#about" class="text-gray-200 hover:text-ot-primary transition duration-300 font-medium">About</a>
+                <a href="#skills" class="text-gray-200 hover:text-ot-primary transition duration-300 font-medium">Skills</a>
+                <a href="#education" class="text-gray-200 hover:text-ot-primary transition duration-300 font-medium">Education</a>
+                <a href="#projects" class="text-gray-200 hover:text-ot-primary transition duration-300 font-medium">Projects</a>
+                <a href="#extracurriculars" class="text-gray-200 hover:text-ot-primary transition duration-300 font-medium">Extracurriculars</a>
+                <a href="#contact" class="text-gray-200 hover:text-ot-primary transition duration-300 font-medium">Contact</a>
+            </div>
+
+            <div class="flex items-center space-x-3">
+                <button id="dark-mode-toggle" class="p-2 rounded-full text-white bg-ot-primary/50 hover:bg-ot-primary transition duration-300 shadow-md">
+                    </button>
+                
+                <button id="mobile-menu-button" class="md:hidden p-2 rounded-full text-white bg-ot-primary/50 hover:bg-ot-primary transition duration-300 shadow-md">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </nav>
+
+        <div id="mobile-menu" class="absolute w-full bg-ot-secondary/95 md:hidden shadow-lg p-4 top-16">
+            <nav class="flex flex-col space-y-3">
+                <a href="#about" class="text-gray-200 hover:text-ot-primary transition duration-300 font-medium p-2" onclick="document.getElementById('mobile-menu-button').click()">About</a>
+                <a href="#skills" class="text-gray-200 hover:text-ot-primary transition duration-300 font-medium p-2" onclick="document.getElementById('mobile-menu-button').click()">Skills</a>
+                <a href="#education" class="text-gray-200 hover:text-ot-primary transition duration-300 font-medium p-2" onclick="document.getElementById('mobile-menu-button').click()">Education</a>
+                <a href="#projects" class="text-gray-200 hover:text-ot-primary transition duration-300 font-medium p-2" onclick="document.getElementById('mobile-menu-button').click()">Projects</a>
+                <a href="#extracurriculars" class="text-gray-200 hover:text-ot-primary transition duration-300 font-medium p-2" onclick="document.getElementById('mobile-menu-button').click()">Extracurriculars</a>
+                <a href="#contact" class="text-gray-200 hover:text-ot-primary transition duration-300 font-medium p-2" onclick="document.getElementById('mobile-menu-button').click()">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <section id="hero" class="py-16 md:py-28 bg-ot-secondary text-white shadow-inner">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center text-center">
+            <div class="relative w-28 h-28 sm:w-36 sm:h-36 mb-6 bg-gray-700 rounded-full shadow-2xl p-1 border-4 border-ot-primary overflow-hidden">
+                <img src="PFP.jpg" onerror="this.onerror=null;this.src='https://placehold.co/150x150/003865/ffffff?text=MZ'" alt="Mark Zebian Profile" class="w-full h-full object-cover rounded-full">
+            </div>
+
+            <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight">
+                Mark Zebian
+            </h1>
+            <p class="mt-3 text-lg text-gray-300 max-w-2xl mx-auto">
+                Mechatronics Engineering Student at Ontario Tech | Focus on Robotics, Automation & Smart Design
+            </p>
+            <div class="mt-8">
+                 <a href="#contact" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-semibold rounded-xl text-ot-secondary bg-ot-primary hover:bg-ot-primary/90 transition duration-300 shadow-lg hover:shadow-ot-primary">
+                    <i data-lucide="mail" class="w-5 h-5 mr-2"></i> Get In Touch
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-20">
+
+        <section id="about" class="mb-16">
+            <h2 class="text-3xl font-bold mb-6 text-ot-secondary dark:text-ot-primary text-center md:text-left border-b-2 border-ot-primary/50 pb-2">About Me</h2>
+            <div class="bg-white dark:bg-gray-800 p-6 md:p-8 rounded-2xl shadow-lg transition-colors duration-300">
+                <p class="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
+                    I am a Mechatronics Engineering student at <b>Ontario Tech University</b>. I love hands-on work—building, testing, 
+                    and creating new ideas. I'm interested in robotics, automated machines, and artificial intelligence, 
+                    and I use my classes and personal projects to learn more about these areas. I am skilled in CAD design, programming, 
+                    and teamwork, and I focus on making and improving real-world engineering solutions.
+                </p>
+            </div>
+        </section>
+
+        <section id="qualifications" class="mb-16">
+            <h2 class="text-3xl font-bold mb-6 text-ot-secondary dark:text-ot-primary text-center md:text-left border-b-2 border-ot-primary/50 pb-2">Key Skills</h2>
+            <div class="max-w-3xl mx-auto space-y-3">
+                
+                <div class="rounded-xl overflow-hidden shadow-md">
+                    <button class="qualification-title w-full text-left p-4 bg-gray-200 dark:bg-gray-700 text-ot-secondary dark:text-ot-primary font-semibold text-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition duration-200 flex justify-between items-center">
+                        Teamwork and Leadership
+                        <i data-lucide="chevron-down" class="w-5 h-5 ml-2 transition-transform duration-300"></i>
+                    </button>
+                    <div class="qualification-content p-4 bg-white dark:bg-gray-800 border-l-4 border-ot-primary/80">
+                        <p class="text-gray-700 dark:text-gray-300">I have strong experience in teamwork and leadership from sports, volunteer work, and school projects.</p>
+                    </div>
+                </div>
+                
+                <div class="rounded-xl overflow-hidden shadow-md">
+                    <button class="qualification-title w-full text-left p-4 bg-gray-200 dark:bg-gray-700 text-ot-secondary dark:text-ot-primary font-semibold text-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition duration-200 flex justify-between items-center">
+                        Fast Learning
+                        <i data-lucide="chevron-down" class="w-5 h-5 ml-2 transition-transform duration-300"></i>
+                    </button>
+                    <div class="qualification-content p-4 bg-white dark:bg-gray-800 border-l-4 border-ot-primary/80">
+                        <p class="text-gray-700 dark:text-gray-300">I learn quickly and adapt to new tools, technologies, and work environments easily.</p>
+                    </div>
+                </div>
+
+                <div class="rounded-xl overflow-hidden shadow-md">
+                    <button class="qualification-title w-full text-left p-4 bg-gray-200 dark:bg-gray-700 text-ot-secondary dark:text-ot-primary font-semibold text-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition duration-200 flex justify-between items-center">
+                        Problem Solving and Design
+                        <i data-lucide="chevron-down" class="w-5 h-5 ml-2 transition-transform duration-300"></i>
+                    </button>
+                    <div class="qualification-content p-4 bg-white dark:bg-gray-800 border-l-4 border-ot-primary/80">
+                        <p class="text-gray-700 dark:text-gray-300">I am good at solving problems and creative design from my hands-on projects.</p>
+                    </div>
+                </div>
+
+                <div class="rounded-xl overflow-hidden shadow-md">
+                    <button class="qualification-title w-full text-left p-4 bg-gray-200 dark:bg-gray-700 text-ot-secondary dark:text-ot-primary font-semibold text-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition duration-200 flex justify-between items-center">
+                        Technical Tools
+                        <i data-lucide="chevron-down" class="w-5 h-5 ml-2 transition-transform duration-300"></i>
+                    </button>
+                    <div class="qualification-content p-4 bg-white dark:bg-gray-800 border-l-4 border-ot-primary/80">
+                        <p class="text-gray-700 dark:text-gray-300">I have experience with <b>SolidWorks</b> CAD, <b>Java</b> programming, and technical presentations.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+
+        <section id="tech-stack" class="mb-16">
+            <h2 class="text-3xl font-bold mb-6 text-ot-secondary dark:text-ot-primary text-center md:text-left border-b-2 border-ot-primary/50 pb-2">Technical Tool Stack</h2>
+            <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg transition-colors duration-300">
+                <p class="text-center text-gray-700 dark:text-gray-300 mb-6">Technologies and software I've used in my studies and projects.</p>
+                <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-8 text-center">
+                    
+                    <div class="flex flex-col items-center">
+                        <i data-lucide="box" class="w-12 h-12 text-ot-primary mb-2 dark:bg-gray-900 dark:p-2 rounded-lg"></i>
+                        <span class="text-sm font-medium text-gray-700 dark:text-gray-300">SolidWorks</span>
+                    </div>
+
+                    <div class="flex flex-col items-center">
+                        <i data-lucide="code" class="w-12 h-12 text-ot-primary mb-2 dark:bg-gray-900 dark:p-2 rounded-lg"></i>
+                        <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Java</span>
+                    </div>
+
+                    <div class="flex flex-col items-center">
+                        <i data-lucide="calculator" class="w-12 h-12 text-ot-primary mb-2 dark:bg-gray-900 dark:p-2 rounded-lg"></i>
+                        <span class="text-sm font-medium text-gray-700 dark:text-gray-300">MATLAB</span>
+                    </div>
+
+                    <div class="flex flex-col items-center">
+                        <i data-lucide="circuit-board" class="w-12 h-12 text-ot-primary mb-2 dark:bg-gray-900 dark:p-2 rounded-lg"></i>
+                        <span class="text-sm font-medium text-gray-700 dark:text-gray-300">MultiSim</span>
+                    </div>
+                    
+                    <div class="flex flex-col items-center">
+                        <i data-lucide="monitor-dot" class="w-12 h-12 text-ot-primary mb-2 dark:bg-gray-900 dark:p-2 rounded-lg"></i>
+                        <span class="text-sm font-medium text-gray-700 dark:text-gray-300">PPT/Presentations</span>
+                    </div>
+
+                    <div class="flex flex-col items-center">
+                        <i data-lucide="users-2" class="w-12 h-12 text-ot-primary mb-2 dark:bg-gray-900 dark:p-2 rounded-lg"></i>
+                        <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Teamwork</span>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="mb-16">
+            <h2 class="text-3xl font-bold mb-6 text-ot-secondary dark:text-ot-primary text-center md:text-left border-b-2 border-ot-primary/50 pb-2">Proficiency</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg transition-colors duration-300">
+                    <h3 class="text-2xl font-semibold mb-4 text-ot-secondary dark:text-ot-primary">Technical Skills</h3>
+                    <div class="space-y-4">
+                        <div class="skill-item">
+                            <div class="skill-name flex justify-between font-medium text-gray-700 dark:text-gray-300"><span>SolidWorks (CSWA)</span> <span class="skill-percentage text-ot-primary">85%</span></div>
+                            <div class="progress-bar h-2.5 bg-gray-200 rounded-full">
+                                <div class="progress h-full bg-ot-primary rounded-full" data-width="85%" style="width: 0;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name flex justify-between font-medium text-gray-700 dark:text-gray-300"><span>Java Programming</span> <span class="skill-percentage text-ot-primary">70%</span></div>
+                            <div class="progress-bar h-2.5 bg-gray-200 rounded-full">
+                                <div class="progress h-full bg-ot-primary rounded-full" data-width="70%" style="width: 0;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name flex justify-between font-medium text-gray-700 dark:text-gray-300"><span>MATLAB / Maple</span> <span class="skill-percentage text-ot-primary">60%</span></div>
+                            <div class="progress-bar h-2.5 bg-gray-200 rounded-full">
+                                <div class="progress h-full bg-ot-primary rounded-full" data-width="60%" style="width: 0;"></div>
+                            </div>
+                        </div>
+                          <div class="skill-item">
+                            <div class="skill-name flex justify-between font-medium text-gray-700 dark:text-gray-300"><span>Circuit Design (MultiSim)</span> <span class="skill-percentage text-ot-primary">55%</span></div>
+                            <div class="progress-bar h-2.5 bg-gray-200 rounded-full">
+                                <div class="progress h-full bg-ot-primary rounded-full" data-width="55%" style="width: 0;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg transition-colors duration-300">
+                    <h3 class="text-2xl font-semibold mb-4 text-ot-secondary dark:text-ot-primary">Other Skills & Certifications</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
+                        <li><b>Teamwork</b> and <b>Communication</b></li>
+                        <li><b>Problem-Solving</b> and <b>Adaptability</b></li>
+                        <li><b>Leadership</b> and <b>Organization</b></li>
+                    </ul>
+                    <h4 class="text-lg font-semibold mt-6 mb-2 text-ot-secondary dark:text-ot-primary">Certifications</h4>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
+                        <li><b>Certified SolidWorks Associate (CSWA)</b> – Proof of CAD Design skills.</li>
+                        <li>Standard First Aid CPR/AED Level C (Blended)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="education" class="mb-16">
+            <h2 class="text-3xl font-bold mb-6 text-ot-secondary dark:text-ot-primary text-center md:text-left border-b-2 border-ot-primary/50 pb-2">Education</h2>
+            <div class="space-y-6">
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg border-l-4 border-ot-primary transition-colors duration-300">
+                    <h3 class="text-xl font-bold text-ot-secondary dark:text-ot-primary">Ontario Tech University, Oshawa, ON</h3>
+                    <p class="text-gray-700 dark:text-gray-400 mt-1">Bachelor of Mechatronics Engineering — <b>Expected 2028</b></p>
+                    <p class="text-sm text-gray-500 dark:text-gray-500 mt-2">Relevant coursework: Engineering Design, Intro to Engineering, Physics 2, Calculus 2</p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg border-l-4 border-ot-primary transition-colors duration-300">
+                    <h3 class="text-xl font-bold text-ot-secondary dark:text-ot-primary">Agincourt Collegiate Institute, Scarborough, ON</h3>
+                    <p class="text-gray-700 dark:text-gray-400 mt-1">High School Diploma — Graduated June 2024</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-500 mt-2">Relevant Course: Computer Science</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="projects" class="mb-16">
+            <h2 class="text-3xl font-bold mb-6 text-ot-secondary dark:text-ot-primary text-center md:text-left border-b-2 border-ot-primary/50 pb-2">Projects</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden border-t-4 border-ot-primary hover:shadow-ot-primary/50 transition duration-300 transform hover:-translate-y-1">
+                    
+                    <img src="C:\Users\Owner\iCloudDrive\Personal\Personal-Projects\Portfolio\Scissor_Lift.png" 
+                        onerror="this.onerror=null;this.src='https://placehold.co/600x250/003865/ffffff?text=CAD+Model+Screenshot'"
+                        alt="Scissor Lift CAD Design Screenshot" 
+                        class="w-full h-48 object-cover object-center">
+
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2 text-ot-primary">Scissor Lift Design</h3>
+                        <p class="text-gray-500 dark:text-gray-400 mb-4 text-sm">Ontario Tech University | Winter 2025</p>
+                        
+                        <div class="flex space-x-4 mb-4">
+                            <a href="C:\Users\Owner\iCloudDrive\Personal\Personal-Projects\Portfolio\Scissor_Lift.png" target="_blank" class="text-ot-secondary dark:text-ot-light-bg text-sm font-semibold hover:text-ot-primary transition duration-200 flex items-center">
+                                <i data-lucide="image" class="w-4 h-4 mr-1"></i> Full View
+                            </a>
+                            <a href="C:\Users\Owner\iCloudDrive\Personal\Personal-Projects\Portfolio\scissor_Lift_Extension.mp4" target="_blank" class="text-ot-secondary dark:text-ot-light-bg text-sm font-semibold hover:text-ot-primary transition duration-200 flex items-center">
+                                <i data-lucide="youtube" class="w-4 h-4 mr-1"></i> Demo Video
+                            </a>
+                        </div>
+
+                        <ul class="list-disc list-outside space-y-2 pl-5 text-gray-700 dark:text-gray-300">
+                            <li>I designed a working scissor lift using <b>SolidWorks</b> to test mechanical movement.</li>
+                            <li>I built accurate 3D CAD models for every part of the lift.</li>
+                            <li>I presented the final design to my instructors, showing how it works.</li>
+                        </ul>
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="text-xs font-medium bg-ot-secondary text-white px-3 py-1 rounded-full">CAD Design</span>
+                            <span class="text-xs font-medium bg-ot-secondary text-white px-3 py-1 rounded-full">SolidWorks</span>
+                            <span class="text-xs font-medium bg-ot-secondary text-white px-3 py-1 rounded-full">Presentation</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden border-t-4 border-ot-primary hover:shadow-ot-primary/50 transition duration-300 transform hover:-translate-y-1">
+                    
+                    <img src="C:\Users\Owner\iCloudDrive\Personal\Personal-Projects\Portfolio\Simon_Game.png" 
+                        onerror="this.onerror=null;this.src='https://placehold.co/600x250/003865/ffffff?text=Java+GUI+Screenshot'"
+                        alt="Simon Memory Game Screenshot" 
+                        class="w-full h-48 object-cover object-center">
+
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2 text-ot-primary">Simon Memory Game</h3>
+                        <p class="text-gray-500 dark:text-gray-400 mb-4 text-sm">Independent Project | Spring 2024</p>
+                        
+                        <div class="flex space-x-4 mb-4">
+                            <a href="C:\Users\Owner\iCloudDrive\Personal\Personal-Projects\Portfolio\Simon_Game.png" target="_blank" class="text-ot-secondary dark:text-ot-light-bg text-sm font-semibold hover:text-ot-primary transition duration-200 flex items-center">
+                                <i data-lucide="image" class="w-4 h-4 mr-1"></i> Full View
+                            </a>
+                            <a href="C:\Users\Owner\iCloudDrive\Personal\Personal-Projects\Portfolio\Simon_Game_Trial.mp4" target="_blank" class="text-ot-secondary dark:text-ot-light-bg text-sm font-semibold hover:text-ot-primary transition duration-200 flex items-center">
+                                <i data-lucide="video" class="w-4 h-4 mr-1"></i> Demo Video
+                            </a>
+                        </div>
+
+                        <ul class="list-disc list-outside space-y-2 pl-5 text-gray-700 dark:text-gray-300">
+                            <li>I programmed an interactive Simon Memory Game with a custom <b>Java</b> graphic screen.</li>
+                            <li>I used good programming rules to make the game logic clean and the buttons responsive.</li>
+                            <li>This project showed my personal problem-solving and technical creativity.</li>
+                        </ul>
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="text-xs font-medium bg-ot-secondary text-white px-3 py-1 rounded-full">Java</span>
+                            <span class="text-xs font-medium bg-ot-secondary text-white px-3 py-1 rounded-full">Programming</span>
+                            <span class="text-xs font-medium bg-ot-secondary text-white px-3 py-1 rounded-full">Game Logic</span>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+
+        <section id="extracurriculars" class="mb-16">
+            <h2 class="text-3xl font-bold mb-6 text-ot-secondary dark:text-ot-primary text-center md:text-left border-b-2 border-ot-primary/50 pb-2">Extracurriculars & Volunteer Work</h2>
+            <div class="space-y-8">
+                
+                <div class="job bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg border-l-4 border-ot-primary transition-colors duration-300">
+                    <h3 class="text-xl font-bold text-ot-secondary dark:text-ot-primary">Summer Camp Head Staff</h3>
+                    <p class="text-gray-500 dark:text-gray-400 mt-1">Canadian Druze Society | Summer 2022 & 2023</p>
+                    <ul class="list-disc list-outside space-y-1 pl-5 mt-3 text-gray-700 dark:text-gray-300">
+                        <li>I led and organized daily activities, including sports, arts, and field trips.</li>
+                        <li>I supervised campers and created a positive, safe, and inclusive environment.</li>
+                        <li>I <b>coached Junior Staff</b> on leading activities and giving feedback.</li>
+                        <li>I helped the Camp Director with <b>budgeting</b> and <b>marketing</b> ideas.</li>
+                    </ul>
+                </div>
+
+                <div class="job bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg border-l-4 border-ot-primary transition-colors duration-300">
+                    <h3 class="text-xl font-bold text-ot-secondary dark:text-ot-primary">Robotics Club Member</h3>
+                    <p class="text-gray-500 dark:text-gray-400 mt-1">Agincourt Collegiate Institute | 2023-2024</p>
+                    <ul class="list-disc list-outside space-y-1 pl-5 mt-3 text-gray-700 dark:text-gray-300">
+                        <li>I had a <b>crucial role</b> in organizing and publicizing club updates through a dedicated Discord server.</li>
+                        <li>I gave workshops on robotics history and core principles.</li>
+                        <li>I worked on developing and improving Robots for school-board games.</li>
+                    </ul>
+                </div>
+                
+                <div class="job bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg border-l-4 border-ot-primary transition-colors duration-300">
+                    <h3 class="text-xl font-bold text-ot-secondary dark:text-ot-primary">Independent Tutor (English, Math, Sciences)</h3>
+                    <p class="text-gray-500 dark:text-gray-400 mt-1">Independent | 2022-2024</p>
+                    <ul class="list-disc list-outside space-y-1 pl-5 mt-3 text-gray-700 dark:text-gray-300">
+                        <li>I tutored kids (ages 6-13) in English, Math, French, and Sciences.</li>
+                        <li>I grew this business independently through <b>word of mouth</b>.</li>
+                        <li>I communicated constantly with parents about the children's progress.</li>
+                    </ul>
+                </div>
+
+                <div class="job bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg border-l-4 border-ot-primary transition-colors duration-300">
+                    <h3 class="text-xl font-bold text-ot-secondary dark:text-ot-primary">Event Planner</h3>
+                    <p class="text-gray-500 dark:text-gray-400 mt-1">Strides Toronto | 2023</p>
+                    <ul class="list-disc list-outside space-y-1 pl-5 mt-3 text-gray-700 dark:text-gray-300">
+                        <li>I helped organize a welcoming space for youth and planned special events like Halloween activities.</li>
+                        <li>I completed first aid/CPR training, becoming a <b>certified first responder</b>.</li>
+                    </ul>
+                </div>
+
+                <div class="job bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg border-l-4 border-ot-primary transition-colors duration-300">
+                    <h3 class="text-xl font-bold text-ot-secondary dark:text-ot-primary">Youth Games Organizer</h3>
+                    <p class="text-gray-500 dark:text-gray-400 mt-1">City of Toronto | 2022</p>
+                    <ul class="list-disc list-outside space-y-1 pl-5 mt-3 text-gray-700 dark:text-gray-300">
+                        <li>I was in charge of organizing diverse programs and activities for youth.</li>
+                        <li>I focused on creating an <b>inclusive experience</b> and building a team culture.</li>
+                        <li>I handled administrative tasks like planning the group lunch.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section id="contact" class="mb-16">
+            <h2 class="text-3xl font-bold mb-6 text-ot-secondary dark:text-ot-primary text-center md:text-left border-b-2 border-ot-primary/50 pb-2">Contact</h2>
+            <div class="max-w-xl mx-auto bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-2xl transition-colors duration-300 space-y-4 text-lg text-gray-700 dark:text-gray-300">
+                <p class="flex items-center">
+                    <i data-lucide="mail" class="w-5 h-5 mr-3 text-ot-primary"></i> 
+                    Email: <a href="mailto:zebianmark@gmail.com" class="text-ot-primary hover:underline ml-2">zebianmark@gmail.com</a>
+                </p>
+                <p class="flex items-center">
+                    <i data-lucide="phone" class="w-5 h-5 mr-3 text-ot-primary"></i> 
+                    Phone: +1 (416) 834-3664
+                </p>
+                <p class="flex items-center">
+                    <i data-lucide="linkedin" class="w-5 h-5 mr-3 text-ot-primary"></i> 
+                    LinkedIn: <a href="https://www.linkedin.com/in/markzebian0513" target="_blank" class="text-ot-primary hover:underline ml-2">in/markzebian0513</a>
+                </p>
+                <p class="flex items-center">
+                    <i data-lucide="github" class="w-5 h-5 mr-3 text-ot-primary"></i> 
+                    GitHub: <a href="https://github.com/MarkZebian" target="_blank" class="text-ot-primary hover:underline ml-2">MarkZebian</a>
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-ot-secondary border-t border-gray-700">
+        <div class="container mx-auto px-4 py-6 text-center text-gray-300">
+            <p>&copy; 2025 Mark Zebian.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // 1. Dark Mode Toggle
+        const htmlElement = document.documentElement;
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+
+        const setIcon = (isDark) => {
+            const iconName = isDark ? 'sun' : 'moon';
+            darkModeToggle.innerHTML = `<i data-lucide="${iconName}" class="w-5 h-5"></i>`;
+            lucide.createIcons();
+        };
+
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const initialIsDark = savedTheme === 'dark' || (savedTheme === null && prefersDark);
+
+        if (initialIsDark) {
+            htmlElement.classList.add('dark');
+        }
+        setIcon(initialIsDark);
+
+        darkModeToggle.addEventListener('click', () => {
+            const currentIsDark = htmlElement.classList.toggle('dark');
+            localStorage.setItem('theme', currentIsDark ? 'dark' : 'light');
+            setIcon(currentIsDark);
+        });
+
+        // 2. Mobile Menu Toggle (New Feature)
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+            const icon = mobileMenuButton.querySelector('i');
+            // Toggle between 'menu' and 'x' icon
+            icon.innerHTML = mobileMenu.classList.contains('open') 
+                ? '<i data-lucide="x" class="w-6 h-6"></i>' 
+                : '<i data-lucide="menu" class="w-6 h-6"></i>';
+            lucide.createIcons();
+        });
+
+
+        // 3. Interactive Qualifications (Accordion)
+        document.querySelectorAll('.qualification-title').forEach(title => {
+            title.addEventListener('click', function() {
+                const content = this.nextElementSibling;
+                const icon = this.querySelector('i');
+                const isExpanded = content.style.display === "block";
+
+                // Close all others
+                document.querySelectorAll('.qualification-title').forEach(otherTitle => {
+                    const otherContent = otherTitle.nextElementSibling;
+                    const otherIcon = otherTitle.querySelector('i');
+                    if (otherContent !== content) {
+                        otherContent.style.display = "none";
+                        otherIcon.classList.remove('rotate-180');
+                    }
+                });
+
+                // Toggle the current one
+                if (isExpanded) {
+                    content.style.display = "none";
+                    icon.classList.remove('rotate-180');
+                } else {
+                    content.style.display = "block";
+                    icon.classList.add('rotate-180');
+                }
+            });
+        });
+
+        // 4. Animate Skill Bars using Intersection Observer (New Advanced Feature)
+        const animateSkills = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const bar = entry.target.querySelector('.progress');
+                    const width = bar.getAttribute('data-width');
+                    bar.style.width = width;
+                    // Stop observing once it has animated
+                    observer.unobserve(entry.target);
+                }
+            });
+        };
+
+        const skillSection = document.getElementById('skills');
+        if (skillSection) {
+            const observer = new IntersectionObserver(animateSkills, {
+                root: null, 
+                rootMargin: '0px',
+                threshold: 0.1 
+            });
+
+            // Observe each skill-item container
+            skillSection.querySelectorAll('.skill-item').forEach(item => {
+                // Ensure initial width is 0 for animation, set in HTML style attribute for reliability
+                item.querySelector('.progress').style.width = '0%'; 
+                observer.observe(item);
+            });
+        }
+    </script>
+</body>
+</html>
